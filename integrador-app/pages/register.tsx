@@ -1,12 +1,17 @@
+import React from 'react'
 
+import NavBar from '@/components/navBar'
 
-function register() {
+function Register() {
   return (
-
-        <main className="bg-[url('../public/background-register.jpg')] w-screen h-screen flex items-center justify-center" >
-            <h1>Olá</h1>
-        </main>
-  );
+    <div className="bg-[url('../public/background-register.jpg')] h-screen w-screen justify-center items-center flex">
+      <NavBar />
+      <main>
+        <div></div>
+        <div></div>
+      </main>
+    </div>
+  )
 }
 
-export default register;
+export default Register
