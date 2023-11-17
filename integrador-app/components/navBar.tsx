@@ -7,7 +7,9 @@ function NavBar() {
     <header className="h-12 w-full fixed top-0 left-0 ">
       <nav className="flex justify-between">
         <h1 className="ml-10 text-2xl text-white font-semibold items-center">
-          EstrelaFlicks
+          <Link href={`/home`}>
+            EstrelaFlicks
+          </Link>
         </h1>
         <ul className="flex justify-around items-center flex-row mr-10">
           <li className="mr-10 text-xl text-white ">

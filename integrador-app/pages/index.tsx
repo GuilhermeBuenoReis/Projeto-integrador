@@ -1,5 +1,7 @@
 import { Roboto } from 'next/font/google'
 
+import NavBarHomePage from '@/components/navBarHomePage'
+
 const roboto = Roboto({
   weight: ['400', '700'],
   style: ['normal', 'italic'],
@@ -8,9 +10,9 @@ const roboto = Roboto({
 
 export default function Home() {
   return (
-    <main className={roboto.className}>
+    <main className={`${roboto.className} h-screen w-screen bg-blue-950 `}>
       <div>
-        <h1>Olá seus Bundudos</h1>
+        <NavBarHomePage />
       </div>
     </main>
   )
