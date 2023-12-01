@@ -10,10 +10,11 @@ const roboto = Roboto({
 
 export default function Home() {
   return (
-      <div className={`${roboto.className} h-screen w-screen bg-gradient-to-br from-gray-900 to-gray-800`}>
-        <main className=" flex items-center justify-center w-screen h-screen">
-          <HomePage />
-        </main>
-      </div>
+    <div className={`${roboto.className} h-screen w-screen bg-slate-900 text-black`}>
+      <main>
+        <HomePage />
+      </main>
+    </div>
   )
 }
+
