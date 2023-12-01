@@ -6,6 +6,8 @@ import "@/styles/home.module.css";
 
 import Link from "next/link";
 
+import {Search} from 'lucide-react'
+
 const HomePage = () => {
 
   return (
@@ -16,7 +18,10 @@ const HomePage = () => {
 
         <div className="flex justify-evenly items-center h-screen w-screen flex-col">
           <div className=" flex items-center justify-center w-screen flex-col ">
-            <label className="text-white text-2xl mb-2">Digite o seu filme ou série prefirida</label>
+            <div className="">
+              <label className="text-white text-2xl mb-2">Digite o seu filme ou série prefirida</label>
+              <Search className=""/>
+            </div>
             <input 
               type="search" 
               placeholder="Digite seu filme ou série"
