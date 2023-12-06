@@ -6,7 +6,7 @@ function NavBar() {
   return (
     <header className="h-12 w-full fixed top-0 left-0 ">
       <nav className="flex justify-between">
-        <h1 className="ml-10 text-2xl text-white font-semibold items-center">
+        <h1 className="ml-10 text-2xl text-white font-semibold items-center ">
           <Link href={`/Home`}>
             EstrelaFlicks
           </Link>
