@@ -20,6 +20,8 @@ model user {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
+  ratings rating[]
+
 }
 
 model movie {
@@ -27,7 +29,25 @@ model movie {
   name String @unique
   releaseDate String
   imageURL String
+  sinopse String
+  director String
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+  ratings rating[]
+}
+
+model rating {
+  id      Int     @id @unique @default(autoincrement())
+  value   Int
+  comment String?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  userId  Int
+  movieId Int
+  user    user  @relation(fields: [userId], references: [id])
+  movie   movie @relation(fields: [movieId], references: [id])
 }
