@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 
 export default function loginPage() {
   const [formData, setFormData] = useState({
-    login: '',
+    email: '',
     password: '',
   });
 
@@ -28,7 +28,7 @@ export default function loginPage() {
     event.preventDefault();
 
     try {
-        const response = await fetch('/api/actions/user/login', {
+        const response = await fetch('/api/action/user/login', {
             method: 'POST',
             headers: {'Content-type' : 'application/json'},
             body: JSON.stringify(formData)
@@ -42,6 +42,7 @@ export default function loginPage() {
 
       console.log(response.status);
       console.log(responseJson);
+      
       if (response.status != 200) {
         throw new Error(responseJson.message);
       } else {
@@ -55,7 +56,7 @@ export default function loginPage() {
   }
 
   return (
-    <div className="bg-[url('../public/wp5108053.png')] h-screen w-screen justify-center items-center flex">
+    <div className="bg-[url('../public/wp5108053.png')] h-screen w-screen justify-center items-center flex flex-col">
       <NavBar />
       <main>
         <div className="flex items-center justify-center flex-col w-auto h-auto border-2 pt-48 pb-48 pl-12 pr-12 rounded-xl bg-black/70 ">
@@ -69,9 +70,9 @@ export default function loginPage() {
               placeholder="Digite o email ou nome de usuário"
               className="w-80 h-10 mb-2 rounded-lg bg-black/80  text-white text-center"
               onChange={(event) => {
-                hendleFormEdit(event, 'login');
+                hendleFormEdit(event, 'email');
               }}
-              value={formData.login}
+              value={formData.email}
               required
             />
 
@@ -107,4 +108,28 @@ export default function loginPage() {
       </main>
     </div>
   );
+}
+
+export function getServerSideProps({ req, res }: any) {
+  try {
+      const token = getCookie('authorization', { req, res });
+
+      if (!token) {
+          throw new Error('Invalid token');
+      }
+      console.log(token)
+      checkToken(token);
+      return {
+          redirect: {
+              permanent: false,
+              destination: `/`,
+          },
+          props: {}
+      };
+  }
+  catch (err) {
+      return {
+          props: {}
+      }
+  }
 }

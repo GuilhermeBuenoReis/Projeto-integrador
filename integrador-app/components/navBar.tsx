@@ -4,10 +4,10 @@ import Perfil from './perfil'
 
 function NavBar() {
   return (
-    <header className="h-12 w-full fixed top-0 left-0 ">
+    <header className="w-screen">
       <nav className="flex justify-between">
         <h1 className="ml-10 text-2xl text-white font-semibold items-center ">
-          <Link href={`/Home`}>
+          <Link href={`/`}>
             EstrelaFlicks
           </Link>
         </h1>
@@ -33,4 +33,4 @@ function NavBar() {
   )
 }
 
-export default NavBar
+export default NavBar;

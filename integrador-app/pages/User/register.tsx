@@ -25,7 +25,7 @@ export default function registerPage() {
     event.preventDefault();
 
     try {
-      const response:any = await fetch(`/api/actions/user/create`, {
+      const response:any = await fetch(`/api/action/user/create`, {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify(formData),
@@ -48,7 +48,7 @@ export default function registerPage() {
   }
 
   return (
-    <div className="bg-[url('../public/background-register.jpg')] h-screen w-screen justify-center items-center flex">
+    <div className="bg-[url('../public/background-register.jpg')] h-screen w-screen justify-center items-center flex flex-col">
       <NavBar />
       <main>
         <div className="flex items-center justify-center flex-col w-auto h-auto border-2 pt-40 pb-40 pl-16 pr-16 rounded-xl bg-black/30">

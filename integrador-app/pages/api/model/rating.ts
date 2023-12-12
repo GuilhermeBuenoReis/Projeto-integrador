@@ -22,3 +22,24 @@ export async function createRatingModel(_value: number, _comment: string, _userI
 
     return rating;
 }
+
+export async function findRatingByUserAndMovie(_userId:number , _movieId:number) {
+    const rating = await prisma.rating.findFirst({
+        where: {
+            userId: _userId,
+            movieId: _movieId
+        }
+    })
+
+    return rating;
+}
+
+export async function deleteRatingModel(_id:number) {
+    const rating = await prisma.rating.delete({
+        where: {
+            id: _id
+        }
+    });
+
+    return rating;
+}

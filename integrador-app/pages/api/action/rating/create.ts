@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { createRating } from "../../controller/ratingController";
+import { createRating } from "../../controller/RatingController";
 
 export default async (req: NextApiRequest , res: NextApiResponse) => {
     if ( req.method != 'POST' ) {

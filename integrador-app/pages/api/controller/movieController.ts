@@ -1,46 +1,56 @@
-import { createMovieModel, findMovieByNameModel, selectMoviesModel } from "../model/movie";
+import {
+  createMovieModel,
+  findMovieByNameModel,
+  selectMoviesModel,
+} from '../model/movie';
 
-export async function createMovie(name:string, releaseDate:number, imageURL:string) {
-    try {
-        const movieByName = await findMovieByNameModel(name);
+export async function createMovie(
+  name: string,
+  releaseDate: string,
+  imageURL: string,
+  sinopse: string,
+  director: string,
+) {
+  try {
+    const movieByName = await findMovieByNameModel(name);
 
-        if ( movieByName != undefined ) {
-            return { message: "Movie already registered" };
-        }
-
-        const response = await createMovieModel(name, releaseDate, imageURL);
-        return response;
-
+    if (movieByName != undefined) {
+      return { message: 'Movie already registered' };
     }
-    catch (err) {
-        return { message: "Something went wrong" };
-    }
+
+    const response = await createMovieModel(
+      name,
+      releaseDate,
+      imageURL,
+      sinopse,
+      director,   
+    );
+    return response;
+  } catch (err) {
+    return { message: 'Something went wrong' };
+  }
 }
 
 export async function selectMovies() {
-    try {
-        const movies = await selectMoviesModel();
+  try {
+    const movies = await selectMoviesModel();
 
-        return movies;
-
-    }
-    catch(err) {
-        return { message: "Something went wrong" };
-    }
+    return movies;
+  } catch (err) {
+    return { message: 'Something went wrong' };
+  }
 }
 
-export async function findMovieByName(name:string) {
-    try {
-        const movie = await findMovieByNameModel(name);
+export async function findMovieByName(name: string) {
+  try {
+    const movie = await findMovieByNameModel(name);
 
-        if ( movie == undefined ) {
-            return { message: "Movie not found" };
-        }
-
-        return movie;
-
+    if (movie == undefined) {
+      return { message: 'Movie not found' };
     }
-    catch(err) {
-        return { message: "Something went wrong" };
-    }
+
+    return movie;
+  } catch (err) {
+    return { message: 'Something went wrong' };
+  }
 }

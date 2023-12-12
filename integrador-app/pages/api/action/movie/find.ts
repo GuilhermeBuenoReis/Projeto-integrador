@@ -1,12 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { selectMovies } from "../../controller/movieController";
+import { findMovieByName } from "../../controller/MovieController";
 
 export default async (req: NextApiRequest , res: NextApiResponse) => {
     if ( req.method != 'GET' ) {
         return res.status(403).json({ message: 'Method not allowed' });
     }
 
-    const response:any = await selectMovies();
+    const { name }:any = req.query;
+
+    const response:any = await findMovieByName(name);
     
     if ( response.message != undefined ) {
         return res.status(403).json(response);

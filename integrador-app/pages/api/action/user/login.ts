@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { createUser } from "../../controller/userController";
+import { login } from "../../controller/UserController";
 
 
 export default async (req: NextApiRequest , res: NextApiResponse) => {
@@ -7,14 +7,14 @@ export default async (req: NextApiRequest , res: NextApiResponse) => {
         return res.status(403).json({ message: 'Method not allowed' });
     }
 
-    const { name, email, username, password, confirmPassword } = req.body;
+    const { email , password } = req.body;
 
-    const response:any = await createUser(name, email, username, password, confirmPassword);
+    const response:any = await login(email, password);
 
     if ( response.message != undefined ) {
         return res.status(403).json(response);
     }
     else {
-        return res.status(201).json(response);
+        return res.status(200).json(response);
     }
 }

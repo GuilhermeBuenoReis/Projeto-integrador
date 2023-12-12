@@ -11,10 +11,10 @@ datasource db {
 }
 
 model user {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
+  id       Int     @id @unique @default(autoincrement())
   name     String?
-  username String  @unique
+  username String @unique
+  email    String  @unique
   password String
 
   created_at DateTime @default(now())
@@ -23,28 +23,31 @@ model user {
   ratings rating[]
 }
 
-model movies {
-  id          Int    @id @default(autoincrement())
-  name        String @unique
-  realeseDate Int
-  imageURL    String
+model movie {
+  id          Int     @id @unique @default(autoincrement())
+  name        String  @unique
+  releaseDate String
+  imageURL    String?
+  sinopse     String
+  director    String
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  
+
   ratings rating[]
 }
 
 model rating {
-  id Int @id @default(autoincrement())
-  value Int @default(0)
-  comment String @default("")
+  id      Int     @id @unique @default(autoincrement())
+  value   Int
+  comment String?
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
   userId  Int
   movieId Int
-  user  user  @relation(fields: [userId], references: [id])
-  movie movies @relation(fields: [movieId], references: [id])
+  user    user  @relation(fields: [userId], references: [id])
+  movie   movie @relation(fields: [movieId], references: [id])
 }
+

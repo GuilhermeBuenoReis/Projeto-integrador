@@ -1,35 +1,47 @@
-import { prisma  } from "@/db";
+import { prisma } from '@/db';
+
+export async function createMovieModel(
+  _name: string,
+  _releaseDate: string,
+  _imageURL: string,
+  _sinopse: string,
+  _director: string,
+
+) {
 
 
-export async function createMovieModel(_name:string, _releaseDate:number, _imageURL:string) {
-    const movie = await prisma.movies.create({
-        data: {
-            name: _name,
-            realeseDate: _releaseDate,
-            imageURL: _imageURL
-        }
-    });
+  const movie = await prisma.movie.create({
+    data: {
+      name: _name,
+      releaseDate: _releaseDate,
+      imageURL: _imageURL,
+      sinopse: _sinopse,
+      director: _director,
+    }
+  });
 
-    return movie;
+  return movie;
 }
 
-
-export async function findMovieByNameModel(_name:string) {
-    const movie = await prisma.movies.findUnique({
-        where: {
-            name: _name
-        },
+export async function findMovieByNameModel(_name: string) {
+  const movie = await prisma.movie.findUnique({
+    where: {
+      name: _name,
+    },
+    include: {
+      ratings: {
         include: {
-            ratings: true
+          user: true,
         }
-    });
+      },
+    },
+  });
 
-    return movie;
+  return movie;
 }
-
 
 export async function selectMoviesModel() {
-    const movies = await prisma.movies.findMany();
+  const movies = await prisma.movie.findMany();
 
-    return movies;
+  return movies;
 }

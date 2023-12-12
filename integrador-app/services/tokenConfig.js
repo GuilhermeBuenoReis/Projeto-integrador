@@ -11,7 +11,7 @@ function readToken( token ) {
         return jwt.verify(token , SECRET);
     }
     catch( err ) {
-        throw new ('Invalid Token');
+        throw new('Invalid Token');
     }
 }
 
