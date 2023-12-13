@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 
 import { useEffect, useState } from 'react';
 
-import { getCookie, setCookie } from 'cookies-next';
+import { getCookie } from 'cookies-next';
 
 import { checkToken } from '@/services/tokenConfig';
 
@@ -16,8 +16,8 @@ export default function Datails({ movieName }: any) {
   const [movie, setMovie]: any = useState();
   const [formData, setFormData] = useState({
     value: 5,
-    comment: "",
-    email: "",
+    comment: '',
+    email: '',
     movieName: movieName,
   });
   const router = useRouter();
@@ -31,13 +31,14 @@ export default function Datails({ movieName }: any) {
 
   async function formSubmit() {
     try {
-      const cookie = getCookie("authorization");
+      const cookie = getCookie('authorization');
 
-      const tokenInfos = checkToken(cookie);
+      const tokenInfos = await checkToken(cookie);
+      console.log(checkToken(cookie));
 
       const response = await fetch(`/api/action/rating/create`, {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({
           value: Number(formData.value),
           comment: formData.comment,
@@ -56,6 +57,7 @@ export default function Datails({ movieName }: any) {
     }
   }
 
+  
   async function fetchData() {
     const res = await fetch(`/api/action/movie/find?name=${movieName}`, {
       method: 'GET',
@@ -75,39 +77,26 @@ export default function Datails({ movieName }: any) {
     <div className="w-screen h-screen bg-slate-900 text-white overflow-x-hidden">
       <NavBar />
       {movie != undefined ? (
-        <main className=" h-full flex items-center flex-col mb-10 w-screen">
-          <div className=" w-screen h-screen flex items-center justify-evenly mt-20">
-            <div className="flex flex-col">
-              <Image src={img} alt="image" width={925} className="rounded-lg" />
+        <main className=" h-full w-full flex items-center flex-col mb-10">
+          <div className=" w-screen h-screen flex items-center justify-center">
+            <div className="">
+              <img
+                src={movie.imageURL}
+                alt="image"
+                width={312.5}
+                className="rounded-lg"
+              />
 
-              <div className=" flex items-start justify-start flex-col mt-3">
-                <div className="w-925 h-auto">
-                  <h1 className="text-center text-3xl font-semibold italic">
-                    Sinopse do filme
-                  </h1>
-                  <p className="max-w-4xl break-words text-left">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quae aut error eligendi molestias, voluptates illo,
-                    explicabo labore at earum ipsa dolores incidunt qui quo
-                    reprehenderit cupiditate. Esse, atque sed! Reiciendis!
-                    Maxime architecto, repudiandae mollitia dignissimos
-                    reiciendis non voluptates ducimus dicta totam enim minus
-                    necessitatibus ullam voluptatem perferendis amet. Nostrum
-                    assumenda non quaerat cupiditate. Officiis magni, amet
-                    sapiente explicabo blanditiis culpa. Quod amet iure
-                    quibusdam tenetur sapiente iste qui nostrum, eveniet
-                    corrupti enim. Id accusantium dolor sapiente minus neque vel
-                    fugit autem officia? Asperiores eum neque, maxime quas fugit
-                    explicabo a. Et eos accusamus dicta voluptatem error
-                    placeat. Impedit dolores aut voluptatibus exercitationem
-                    possimus eveniet ut accusantium reprehenderit autem itaque
-                    velit praesentium modi, fuga ipsum quod quidem corporis,
-                    dolor est eius.
-                  </p>
-                </div>
+              <div className="mt-3 flex flex-col items-center">
+                <h1 className="text-left text-3xl font-semibold italic">
+                  Sinopse do filme
+                </h1>
+                <p className="max-w-xl break-words text-left">
+                  {movie.sinopse}
+                </p>
               </div>
             </div>
-            <div className="w-100 border-2 flex-col flex items-center justify-evenly h-104 rounded-md xl:w-94 bg-black/40 mb-56">
+            <div className="w-80 border-2 flex-col flex items-center justify-evenly h-416 mt-12 rounded-md  bg-black/40 mb-56">
               <div className=" w-11/12 text-center text-xl h-22 flex justify-center items-center rounded-lg flex-col">
                 <h1 className="font-semibold italic">Nome do filme:</h1>
                 <h1 className="text-yellow-400">{movie.name}</h1>
@@ -152,6 +141,7 @@ export default function Datails({ movieName }: any) {
                     handleFormEdit(event, 'comment');
                   }}
                   value={formData.comment}
+                  required
                 ></textarea>
 
                 <select
@@ -160,6 +150,7 @@ export default function Datails({ movieName }: any) {
                     handleFormEdit(event, 'value');
                   }}
                   value={formData.value}
+                  required
                 >
                   <option value="0">0</option>
                   <option value="1">1</option>
@@ -186,26 +177,9 @@ export default function Datails({ movieName }: any) {
                   <h1 className="text-xl">{rating.value}</h1>
                 </div>
 
-                <div className=" w-auto p-3 rounded-md">
-                  <h1 className="text-xl mr-2">Comentário: </h1>
-                  <p className="break-words text-left">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Vestibulum vitae sem nec quam fringilla malesuada.
-                    Suspendisse potenti. Sed id justo vel urna consequat aliquet
-                    ac id nulla. Fusce auctor, velit sit amet dictum bibendum,
-                    odio lacus dapibus metus, nec ullamcorper lacus lectus nec
-                    ligula. Aenean ullamcorper, eros ut vulputate sollicitudin,
-                    ligula odio euismod libero, vitae interdum ipsum lacus ut
-                    lectus. In hac habitasse platea dictumst. Ut non dapibus
-                    elit. Sed vel neque non erat varius aliquam. Duis varius,
-                    quam in aliquet venenatis, nisl turpis dictum purus, vel
-                    ullamcorper justo erat sit amet tortor. Integer eu nisl in
-                    lectus ultrices varius a eget elit. Curabitur non risus a
-                    augue auctor tincidunt. Sed eleifend cursus luctus. Nunc
-                    lacinia bibendum elit, vitae tristique libero sollicitudin
-                    at. Nullam non libero sit amet nulla sagittis laoreet.
-                    Suspendisse potenti. lorem*3
-                  </p>
+                <div className=" w-auto p-3 rounded-md my-4">
+                  <h1 className="text-xl mr-2">Comentário:</h1>
+                  <p className="break-words text-left">{rating.comment}</p>
                 </div>
               </div>
             </>
@@ -224,8 +198,8 @@ export function getServerSideProps(context: any) {
   const { movieName } = context.query;
 
   return {
-    props: { 
-        movieName 
-    }
+    props: {
+      movieName,
+    },
   };
 }

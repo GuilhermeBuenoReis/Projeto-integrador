@@ -8,7 +8,7 @@ export function uploadImage(imageUploaded) {
     return new Promise((resolve, reject) => {
         cloudinary.uploader.upload(
             imageUploaded,
-            { width: 925, height: 520, crop: "fill" },
+            { width: 288, height: 480, crop: "fill" },
             (err, res) => {
                 if (err) reject(err);
                 resolve(res);

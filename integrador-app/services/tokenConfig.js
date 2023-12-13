@@ -16,6 +16,6 @@ function readToken( token ) {
 }
 
 
-export function checkToken( token ) {
+export function checkToken(token) {
     return readToken(token);
 }
