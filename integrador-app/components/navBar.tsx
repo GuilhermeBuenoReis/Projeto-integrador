@@ -47,24 +47,7 @@ function NavBar() {
           </li>
 
           <li className="mr-10 text-xl text-yellow-400 ">
-            <Link href="#">Log-out</Link>
-          </li>
-          <li className="mr-10 text-xl text-yellow-400 ">
-            <form
-              className="flex items-center mt-2"
-              onSubmit={hendleFormSubmit}
-            >
-              <input
-                type="text"
-                placeholder="Procure seu filme ou série favorita"
-                className="h-9 w-96 text-center rounded-2xl text-black"
-                onChange={(e) => setSearch(e.target.value)}
-                value={search}
-              />
-              <button>
-                <Search />
-              </button>
-            </form>
+            <Link href={`/User/login`}>Log-out</Link>
           </li>
         </ul>
       </nav>

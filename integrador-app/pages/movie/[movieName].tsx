@@ -117,7 +117,7 @@ export default function Datails({ movieName }: any) {
                   Diretor do filme:
                 </h1>
                 <h1 className="text-yellow-400 text-2xl">
-                  adasdsadsdasdasdsadsa
+                  {movie.director}
                 </h1>
               </div>
             </div>
@@ -167,7 +167,7 @@ export default function Datails({ movieName }: any) {
           </section>
           {movie.ratings.map(rating => (
             <>
-              <div className=" w-3/5 rounded-lg flex justify-center flex-col border-2">
+              <div className=" w-3/5 rounded-lg flex justify-center flex-col border-2 mt-10 mb-10">
                 <div className=" w-96 text-center p-3 rounded-lg flex ">
                   <h1 className="text-xl mr-2">Usuário: </h1>
                   <h1 className="text-xl"> {rating.user.email}</h1>

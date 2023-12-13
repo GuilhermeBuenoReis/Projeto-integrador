@@ -36,13 +36,13 @@ export default function Home() {
     router.push(`/movie/` + movieName);
   }
   return (
-    <div className={`${poppins.className} bg-slate-900 text-black`}>
+    <div className={`${poppins.className} bg-slate-900 text-black overflow-hidden`}>
       <NavBar />
       <main>
-        <div className=" h-full grid grid-cols-3 items-center">
+        <div className=" h-screen w-screen grid grid-cols-3 items-center">
           {data != undefined && data instanceof Array ? (
             data.map((movie) => (
-              <div className="h-screen flex items-center justify-center">
+              <div className="h-full w-full flex items-center justify-center">
                 <div className="h-3/4 w-80 flex justify-center flex-col items-center">
                   <h1 className="text-white text-center text-3xl mb-6">{movie.name}</h1>
                   <img src={movie.imageURL} alt='' className="h-4/6 w-72 rounded-md bg-zinc-50"/>
