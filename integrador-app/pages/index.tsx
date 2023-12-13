@@ -15,6 +15,37 @@ const poppins = Poppins({
 export default function Home() {
   const router = useRouter();
   const [data, setData]: any = useState();
+  const [saveData, setSaveData]:any = useState();
+  const [search, setSearch]: any = useState();
+
+
+  function hendleSearchEdit(event:any) {
+    setSearch(event.target.value);
+  }
+
+  function searchFilter(array: Array<any>) {
+    if( search == '' ) {
+      return array
+    }
+    else {
+      return array.filter(
+        (movie:any) => movie.name.toLowerCase().includes(search)
+      )
+    }
+  }
+
+  function searchSubmit(event:any) {
+    event.preventDefault();
+
+    try {
+      const filteredArray = searchFilter(saveData);
+
+      setData(filteredArray)
+    }
+    catch(err:any) {
+      alert(err.message)
+    }
+  }
 
   async function fecthData() {
     const response = await fetch(`/api/action/movie/select`, {
@@ -24,6 +55,7 @@ export default function Home() {
     const responseJson = await response.json();
 
     setData(responseJson);
+    setSaveData(responseJson)
 
     console.log(responseJson);
   }
@@ -36,16 +68,27 @@ export default function Home() {
     router.push(`/movie/` + movieName);
   }
   return (
-    <div className={`${poppins.className} bg-slate-900 text-black overflow-hidden`}>
+    <div
+      className={`${poppins.className} bg-slate-900 text-black overflow-x-hidden`}
+    >
       <NavBar />
       <main>
-        <div className=" h-screen w-screen grid grid-cols-3 items-center">
+        <form className='w-screen flex justify-center' onSubmit={searchSubmit}>
+          <input type="text" className='border-2 w-2/5 h-9 rounded-lg text-center mt-7' placeholder='Pesquise por sua série ou filme favorita' value={search} onChange={hendleSearchEdit}/>
+        </form>
+        <div className=" grid grid-cols-3 ">
           {data != undefined && data instanceof Array ? (
             data.map((movie) => (
-              <div className="h-full w-full flex items-center justify-center">
+              <div className="h-screen flex items-center justify-center flex-col">
                 <div className="h-3/4 w-80 flex justify-center flex-col items-center">
-                  <h1 className="text-white text-center text-3xl mb-6">{movie.name}</h1>
-                  <img src={movie.imageURL} alt='' className="h-4/6 w-72 rounded-md bg-zinc-50"/>
+                  <h1 className="text-white text-center text-3xl mb-6">
+                    {movie.name}
+                  </h1>
+                  <img
+                    src={movie.imageURL}
+                    alt=""
+                    className="h-4/6 w-72 rounded-md bg-zinc-50"
+                  />
                   <button
                     className="bg-yellow-400 w-72 mt-3 py-3 hover:bg-yellow-600 font-bold text-xl rounded-lg transition-all duration-700"
                     onClick={() => {
@@ -77,14 +120,13 @@ export function getServerSideProps({ req, res }: any) {
     const verifiedToken = checkToken(token);
 
     return { props: { verifiedToken } };
-  }
-  catch (err) {
+  } catch (err) {
     return {
       redirect: {
         permanent: false,
         destination: `/User/login`,
       },
-      props: {}
-    }
+      props: {},
+    };
   }
 }

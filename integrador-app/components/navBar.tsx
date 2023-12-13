@@ -35,7 +35,7 @@ function NavBar() {
   // }
 
   return (
-    <header className="w-screen flex flex-col justify-between">
+    <header className="w-screen flex flex-col justify-between mt-4">
       <nav className="flex justify-between items-center">
         <h1 className="ml-10 text-2xl text-yellow-400 font-semibold items-center ">
           <Link href={`/`}>EstrelaFlicks</Link>

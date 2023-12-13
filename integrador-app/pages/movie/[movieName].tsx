@@ -29,7 +29,9 @@ export default function Datails({ movieName }: any) {
     });
   }
 
-  async function formSubmit() {
+  async function formSubmit(e:any) {
+    e.preventDefault();
+
     try {
       const cookie = getCookie('authorization');
 
@@ -52,6 +54,8 @@ export default function Datails({ movieName }: any) {
       if (response.status != 201) {
         throw new Error(responseJson.message);
       }
+
+      router.reload();
     } catch (err: any) {
       alert(err.message);
     }
@@ -77,7 +81,7 @@ export default function Datails({ movieName }: any) {
     <div className="w-screen h-screen bg-slate-900 text-white overflow-x-hidden">
       <NavBar />
       {movie != undefined ? (
-        <main className=" h-full w-full flex items-center flex-col mb-10">
+        <main className=" h-screen w-full flex items-center flex-col mb-10">
           <div className=" w-screen h-screen flex items-center justify-center">
             <div className="">
               <img
