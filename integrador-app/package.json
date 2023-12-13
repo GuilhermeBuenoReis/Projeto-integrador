@@ -1,0 +1,40 @@
+{
+    "name": "integrador-app",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start",
+      "lint": "eslint src -c .eslintrc.json --ext ts,tsx"
+    },
+    "dependencies": {
+      "@prisma/client": "^5.6.0",
+      "cloudinary": "^1.41.0",
+      "cookies-next": "^4.1.0",
+      "formidable": "^3.5.1",
+      "jsonwebtoken": "^8.5.1",
+      "lucide-react": "^0.292.0",
+      "next": "^14.0.4",
+      "react": "^18",
+      "react-dom": "^18"
+    },
+    "devDependencies": {
+      "@rocketseat/eslint-config": "^2.1.0",
+      "@types/node": "^20",
+      "@types/react": "^18",
+      "@types/react-dom": "^18",
+      "autoprefixer": "^10.4.16",
+      "eslint": "^8.2.0",
+      "eslint-config-airbnb": "^19.0.4",
+      "eslint-config-next": "14.0.2",
+      "eslint-plugin-import": "^2.25.3",
+      "eslint-plugin-jsx-a11y": "^6.5.1",
+      "eslint-plugin-react": "^7.28.0",
+      "eslint-plugin-react-hooks": "^4.3.0",
+      "postcss": "^8.4.31",
+      "prisma": "^5.6.0",
+      "tailwindcss": "^3.3.5",
+      "typescript": "^5"
+    }
+  }
